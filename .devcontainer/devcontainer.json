@@ -1,0 +1,17 @@
+{
+  "name": "Laravel Sail Dev Container",
+  "dockerComposeFile": "../compose.yml",
+  "service": "laravel.test",
+  "workspaceFolder": "/var/www/html",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "onecentlin.laravel-blade",
+        "bmewburn.vscode-laravel-extra-intellisense",
+        "amiralayd.php-laravel-blade"
+      ]
+    }
+  },
+  "remoteUser": "sail"
+}
