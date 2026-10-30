@@ -1,9 +1,13 @@
 {
   "name": "Laravel Sail Dev Container",
-  "dockerComposeFile": "../compose.yml",
+  "dockerComposeFile": [
+    "../compose.yaml",
+    "compose.devcontainer.yaml"
+  ],
   "service": "laravel.test",
   "workspaceFolder": "/var/www/html",
   "shutdownAction": "stopCompose",
+  "updateRemoteUserUID": false,
   "customizations": {
     "vscode": {
       "extensions": [
