@@ -17,3 +17,7 @@ Route::prefix('movies')->group(function() {
 Route::prefix('orders')->group(function() {
     require __DIR__ . '/api.orders.php';
 });
+
+Route::prefix('auth')->group(function () {
+    require __DIR__ . '/api.auth.php';
+});
