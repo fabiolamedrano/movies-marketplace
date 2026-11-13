@@ -3,14 +3,17 @@
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
-// Endpoint rápido para verificar el estado de salud de este servicio aislado
 Route::get('live', function () {
     return response()->json(['service' => 'movies', 'live' => 'is running'], 200);
 });
 
-// Rutas básicas del CRUD que se conectarán a las funciones de nuestro controlador
-Route::get("", [MovieController::class, 'index'])->name('movies.index');       // Ver catálogo completo
-Route::get("{movieId}", [MovieController::class, 'find'])->name('movies.find'); // Buscar película por ID
-Route::post("", [MovieController::class, 'store'])->name('movies.store');       // Subir una nueva película (Vendedores)
-Route::put("{movieId}", [MovieController::class, 'update'])->name('movies.update'); // Editar precio o stock físico
-Route::delete("{movieId}", [MovieController::class, 'destroy'])->name('movies.destroy'); // Eliminar publicación
+// leer el catalogo es publico
+Route::get("", [MovieController::class, 'index'])->name('movies.index');
+Route::get("{movieId}", [MovieController::class, 'find'])->whereNumber('movieId')->name('movies.find');
+
+// escribir exige token, sin token  da 401
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post("", [MovieController::class, 'store'])->name('movies.store');
+    Route::put("{movieId}", [MovieController::class, 'update'])->whereNumber('movieId')->name('movies.update');
+    Route::delete("{movieId}", [MovieController::class, 'destroy'])->whereNumber('movieId')->name('movies.destroy');
+});
